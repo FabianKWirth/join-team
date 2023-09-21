@@ -80,7 +80,7 @@ async function initAddTasks(status) {
   if (users != []) {
     await getStorageData();
   }
-  loadEventListeners();
+  loadTaskEventListeners();
   renderContactAssignmentDropDown();
   unfinishedTaskData = { status: status };
 }
@@ -92,7 +92,7 @@ async function initAddTasks(status) {
  *
  * @returns {void}
  */
-function loadEventListeners() {
+function loadTaskEventListeners() {
   setSelectContactEventListeners();
   setShowAvailableContactsEventListener();
   setSubTaskEventListeners();

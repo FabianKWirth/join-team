@@ -270,6 +270,10 @@
         width: 100%;
         padding: 17px 36px;
     }
+
+    #contactCredentials .circle {
+        margin-top: -60px;
+    }
 }
 
 @media (max-device-width: 1000px) {
@@ -283,9 +287,12 @@
         gap: 0px;
     }
 
-    #contactCredentials .circle {
-        margin-top: -60px;
+    #contactChangeNotificationContainer {
+        left:0;
+        width:100%;
     }
+
+
 
     .add-contact-card-form input {
         width: 100%;
@@ -414,5 +421,49 @@
     .add-contact-container {
         top: 20px;
         bottom: 20px;
+    }
+}
+
+@media (max-width: 800px) {
+    .visible-add-contact-menu-responsive {
+        bottom: 170px;
+    }
+
+    .hidden-add-contact-menu-responsive {
+        bottom: 170px;
+    }
+
+    .responsive-contact-menu-container {
+        bottom: 170px;
+    }
+}
+
+@media (max-height: 800px) {
+    .visible-add-contact-menu-responsive {
+        bottom: 98px;
+    }
+
+    .hidden-add-contact-menu-responsive {
+        bottom: 98px;
+    }
+}
+
+@media (max-height: 800px) {
+    .visible-add-contact-menu-responsive {
+        bottom: 98px;
+    }
+
+    .hidden-add-contact-menu-responsive {
+        bottom: 98px;
+    }
+}
+
+@media (max-height: 786px) {
+    .visible-add-contact-menu-responsive {
+        bottom: 170px;
+    }
+
+    .hidden-add-contact-menu-responsive {
+        bottom: 170px;
     }
 }
