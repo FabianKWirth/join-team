@@ -286,12 +286,12 @@ document.addEventListener('click', function (event) {
 });
 
 
-/*
+
 document.addEventListener('touch', function (event) {
   if (!event.target.classList.contains('responsive-contact-menu-container')) {
     removeMobileContactMenuByClassName();
   }
-});*/
+});
 
 
 

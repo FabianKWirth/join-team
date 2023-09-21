@@ -69,7 +69,7 @@ h4 {
     background-color: white;
     z-index: 1000;
     border-radius: 30px;
-    overflow: hidden;
+    overflow: auto;
     position: relative;
 }
 
