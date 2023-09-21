@@ -21,7 +21,7 @@ async function includeContactHTML(type) {
   window.scrollTo(0, 0);
   removeScrollFromBody();
   setTemplateTypeSpecificValues(type);
-  addEventListenerToCloseElement();
+  addEventListenerToCloseAddContact();
 }
 
 /**
@@ -30,7 +30,7 @@ async function includeContactHTML(type) {
  *
  * @param {Event} event - The click event object.
  */
-function addEventListenerToCloseElement() {
+function addEventListenerToCloseAddContact() {
   document.addEventListener("click", function (event) {
     removeElementsByPartialClassName("add-contact");
     addScrollToBody();

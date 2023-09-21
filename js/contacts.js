@@ -32,7 +32,8 @@ function renderContacts() {
     let thisCurrentLetter = contacts[i]["name"].charAt(0).toUpperCase();
     if (currentLetter != thisCurrentLetter) {
       currentLetter = thisCurrentLetter;
-      renderLetterHeader(list, currentLetter);}
+      renderLetterHeader(list, currentLetter);
+    }
     renderContactListItem(list, i);
   }
   if (selectedContactListElement != null) {
@@ -256,25 +257,51 @@ function unsetSelectedContact() {
 function toggleEditContactMenu() {
   let container = document.getElementById("responsiveMenuContainer");
   if (container.innerHTML == "") {
-    toggleEditContactMenuTemplate(container);
+    renderEditContactMenuTemplate(container);
   } else {
     removeMobileContactMenu(container);
   }
 }
 
-function toggleEditContactMenuTemplate(container) {
+function renderEditContactMenuTemplate(container) {
   container.innerHTML = /*html*/ `
   <div class='responsive-contact-menu-container'>
-  <div onclick='includeContactHTML("editContact")' class="responsive-menu" onmouseover="changeImage('assets/icons/edit-blue.svg', 'editImageResponsive')" onmouseout="changeImage('assets/icons/pen-icon.svg', 'editImageResponsive')">
-    <img id="editImageResponsive" src="assets/icons/pen-icon.svg" alt="Edit Icon">
-      <div>Edit</div>
-  </div>
-  <div onclick="deleteContact(selectedContact)" class="responsive-menu" onmouseover="changeImage('assets/icons/delete-blue.svg', 'trashImageResponsive')" onmouseout="changeImage('assets/icons/trashcan-icon.svg', 'trashImageResponsive')">
-    <img id="trashImageResponsive" src="assets/icons/trashcan-icon.svg" alt="Delete Icon">
-      <div>Delete</div>
-  </div></div>`;
+    <div onclick='includeContactHTML("editContact")' class="responsive-menu" onmouseover="changeImage('assets/icons/edit-blue.svg', 'editImageResponsive')" onmouseout="changeImage('assets/icons/pen-icon.svg', 'editImageResponsive')">
+      <img id="editImageResponsive" src="assets/icons/pen-icon.svg" alt="Edit Icon">
+        <div>Edit</div>
+    </div>
+    <div onclick="deleteContact(selectedContact)" class="responsive-menu" onmouseover="changeImage('assets/icons/delete-blue.svg', 'trashImageResponsive')" onmouseout="changeImage('assets/icons/trashcan-icon.svg', 'trashImageResponsive')">
+      <img id="trashImageResponsive" src="assets/icons/trashcan-icon.svg" alt="Delete Icon">
+        <div>Delete</div>
+    </div>
+  </div>`;
 }
 
+
+
+document.addEventListener('click', function (event) {
+  if (!event.target.classList.contains('responsive-contact-menu-container') && !event.target.classList.contains('menu-button-mobile')) {
+    removeMobileContactMenuByClassName();
+  }
+});
+
+
+/*
+document.addEventListener('touch', function (event) {
+  if (!event.target.classList.contains('responsive-contact-menu-container')) {
+    removeMobileContactMenuByClassName();
+  }
+});*/
+
+
+
+function removeMobileContactMenuByClassName() {
+  let containers = document.getElementsByClassName('responsive-menu-container');
+  for (let i = 0; i < containers.length; i++) {
+    const container = containers[i];
+    removeMobileContactMenu(container);
+  }
+}
 /**
  * Removes the mobile contact menu with a transition effect.
  * @param {HTMLElement} container - The container element to remove the menu from.

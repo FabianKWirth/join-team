@@ -171,8 +171,8 @@ function getCategoryClass(task) {
   let categoryClass = "";
   if (task["taskCategoryValue"] === "Technical Task") {
     categoryClass = "category-technical";
-  } else if (task["taskCategoryValue"] === "Contact Story") {
-    categoryClass = "category-contact-story";
+  } else if (task["taskCategoryValue"] === "User Story") {
+    categoryClass = "category-user-story";
   }
   return categoryClass;
 }

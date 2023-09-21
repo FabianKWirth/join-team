@@ -477,7 +477,7 @@
     color: white;
 }
 
-.category-contact-story {
+.category-user-story {
     background-color: #1FD7C1;
     color: black;
 }
@@ -783,35 +783,11 @@
 
 #addTaskCard {
     display: flex;
-    justify-content: center;
-    align-items: start;
-    max-width: 90%;
-    height: 925px;
-    max-width: 80%;
-    background-color: white;
-    gap: 32px;
-    z-index: 1000;
-    border-radius: 30px;
-    overflow: scroll;
-    position: relative;
-}
-
-#editTaskCard {
-    display: flex;
     justify-content: flex-start;
     align-items: start;
     max-width: 90%;
-    height: 80%;
-
-    width: 525px;
-    background-color: #FFFFFF;
-    border-radius: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    align-items: flex-start;
-    padding: 48px 40px;
-
+    background-color: white;
+    gap: 32px;
     z-index: 1000;
     border-radius: 30px;
     overflow: scroll;
@@ -821,7 +797,6 @@
 #addTaskCard #addTaskContainer {
     position: relative;
 }
-
 
 @keyframes rightToCenter {
     from {
