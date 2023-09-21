@@ -5,6 +5,25 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+.default-page-container {
+    position: absolute;
+    left: 232px;
+    right: 0;
+    top: 96px;
+    bottom: 0;
+    margin: 0;
+    overflow-y: scroll;
+}
+
+@media (max-width: 800px) {
+    .default-page-container {
+        left: 0;
+        right: 0;
+        top: 82px;
+        bottom: 82px;
+    }
+}
+
 h1 {
     font-size: 61px;
     font-weight: 700;
@@ -102,7 +121,7 @@ h3 {
     transform: translate(-50%, -50%);
 }
 
-.hide-overflow{
+.hide-overflow {
     overflow: hidden;
 }
 

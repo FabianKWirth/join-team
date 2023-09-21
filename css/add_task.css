@@ -1,13 +1,3 @@
-.add-task-page-container {
-    position: absolute;
-    left: 232px;
-    right: 0;
-    top: 96px;
-    bottom: 0;
-    margin: 0;
-    overflow-y: scroll;
-}
-
 #addTaskContainer {
     display: flex;
     flex-direction: column;

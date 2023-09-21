@@ -30,9 +30,8 @@ h4 {
     justify-content: center;
     align-items: center;
     left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    top: 20px;
+    height: calc(100vh - 20px);
     width: 100%;
     z-index: 999;
     overflow: hidden;
@@ -185,8 +184,8 @@ h4 {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    
-   
+
+
     left: 54px;
 }
 
@@ -235,7 +234,7 @@ h4 {
     animation: letDisappear 0.5s ease-in-out;
 }
 
-@keyframes letDisappear{
+@keyframes letDisappear {
     0% {
         opacity: 1;
     }
@@ -561,6 +560,3 @@ h4 {
 .dNone {
     display: none;
 }
-
-
-

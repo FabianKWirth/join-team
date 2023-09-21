@@ -39,15 +39,6 @@
     }
 }
 
-@media (max-width: 800px) {
-    .add-task-page-container {
-        left: 0;
-        right: 0;
-        top: 82px;
-        bottom: 82px;
-    }
-}
-
 @media (max-width: 600px) {
      .task-input-container {
         margin-left: 16px;
