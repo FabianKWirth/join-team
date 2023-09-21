@@ -26,6 +26,7 @@ function renderContactAssignmentDropDown() {
     }
 }
 
+
 /**
  * Shows or hides assignable contacts in the UI based on the input provided.
  * It iterates through the 'contacts' array and checks if each contact's name starts with the given input.
@@ -47,6 +48,7 @@ function showAvailableContacts(input) {
     }
 }
 
+
 /**
  * Renders and updates the list of selected contact icons in the 'assignedContactList' element.
  * It generates HTML markup for the selected contact icons based on the 'assignedContacts' array
@@ -62,6 +64,7 @@ function renderSelectedContactIcons() {
     }
     document.getElementById("assignedContactList").innerHTML = html;
 }
+
 
 /**
  * Handles the selection of a task contact row by adding it to the 'assignedContacts' array
@@ -79,6 +82,7 @@ function selectTaskContact(row) {
     renderSelectedContactIcons();
     unfinishedTaskData["assignedContacts"] = assignedContacts;
 }
+
 
 /**
  * Handles the unselection of a task contact row by removing it from the 'assignedContacts' array
@@ -102,6 +106,7 @@ function unselectTaskContact(row) {
     unfinishedTaskData["assignedContacts"] = assignedContacts;
 }
 
+
 /**
  * Adds the selection styling and updates the checkbox icon for a contact row in a task.
  *
@@ -115,6 +120,7 @@ function renderSelectionOfContactFromTask(row, contactId) {
     document.getElementById("selectedContactCheckBox" + contactId).classList.add("white-symbol");
 }
 
+
 /**
  * Removes the selection styling and updates the checkbox icon for a contact row in a task.
  *
@@ -127,6 +133,7 @@ function renderUnselectionOfContactFromTask(row, contactId) {
     document.getElementById("selectedContactCheckBox" + contactId).src = './assets/icons/checkbox-empty.svg';
     document.getElementById("selectedContactCheckBox" + contactId).classList.remove("white-symbol");
 }
+
 
 /**
  * Sets the selected task priority to the provided value and updates the unfinished task data.

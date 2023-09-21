@@ -17,6 +17,7 @@ async function submitTask() {
     }
 }
 
+
 /**
  * Renders a notification element to indicate that a task has been successfully added to the board.
  * This function dynamically generates HTML for the notification element and appends it to the
@@ -32,6 +33,7 @@ function renderTaskAddedElement() {
     }
 }
 
+
 /** 
  * Calls functions to save the data entered by the contact into the unfinishedTaskData JSON array
  * Calls a function to check wether the Task can be created
@@ -40,6 +42,7 @@ function saveCurrentEntriesToTask() {
     saveGlobalVariables();
     saveDirectInputFields();
 }
+
 
 /**
  * Saves validated selected global variables into the 'unfinishedTaskData' JSON array
@@ -60,6 +63,7 @@ function saveGlobalVariables() {
         unfinishedTaskData["priority"] = selectedTaskPriority;
     }
 }
+
 
 /**
  * Saves the values of specified direct input fields into the 'unfinishedTaskData' object.
@@ -86,7 +90,6 @@ function saveDirectInputFields() {
     }
 }
 
-//RESET INPUT VALUES
 
 /**
  * Empties and resets the elements and input fields within the Add Task form to their default states.
@@ -122,6 +125,7 @@ function resetDirectInputFields() {
     });
 }
 
+
 /**
  * Resets various indirect inputs and data related to task creation.
  * This function clears the selected task priority, resets the subtasks array,
@@ -138,6 +142,7 @@ function resetIndirectInputs() {
     showAssignedContacts = false;
     assignedContacts = [];
 }
+
 
 /**
  * Resets the priority selection menu by unchecking all radio buttons.
@@ -164,7 +169,7 @@ function resetPriority() {
  */
 function loadTask(taskId) {
     let task = tasks[taskId];
-
+    console.log(task);
     document.getElementById("addTaskTitle").innerHTML = 'Edit Task';
     unfinishedTaskData = task;
     setNewTaskTitleFieldValue(task);

@@ -108,7 +108,7 @@ async function openEditTaskTemplate(taskId) {
         <div id="addTaskCard"><div include-tasks-html="./assets/templates/add_task_template.html"></div></div>
     </div>`;
 
-    await includeTasksHtml();
+    await includeTasksHtml(tasks[taskId]['status']);
     loadTask(taskId);
     includeEventlistenerToCloseAddTask()
 }

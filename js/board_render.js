@@ -17,6 +17,7 @@ function renderProgressBar(progressPercentage, completedSubtaskCount, subtaskCou
     `;
 }
 
+
 /**
  * Renders an HTML task card based on the provided data and elements.
  *
@@ -49,6 +50,7 @@ function renderTaskCards(index, task, categoryClass, progressBarHTML, assignedCo
     </div>
     `;
 }
+
 
 /**
  * Generates an HTML task card for display in an overlay.
@@ -120,6 +122,7 @@ function generateTaskCardHTML(index, categoryClass, category, name, description,
     `;
 }
 
+
 /**
  * Generates HTML code for a subtask within a task card.
  *
@@ -140,6 +143,7 @@ function renderSubtask(subtaskId, subtaskStatus, i, index, subtaskImgSrc, subtas
     `;
 }
 
+
 /**
  * Generates HTML code for assigned contacts within a task card.
  *
@@ -159,6 +163,7 @@ function getAssignedContactsRenderHTML(contacts, assignedContact) {
         return "";
     }
 }
+
 
 /**
  * Generates the HTML for the "Move To" dropdown menu in a task card.
@@ -183,6 +188,7 @@ function renderMoveToInTaskCards(index) {
     `;
 }
 
+
 /**
  * Renders the HTML for a task and appends it to the 'toDo' section.
  *
@@ -193,6 +199,7 @@ function renderTaskHTML(task, index){
     let taskStatus=task['status'];
     document.getElementById(taskStatus).innerHTML += generateHTML(task, index);
 }
+
 
 /**
  * Renders the HTML for a task in the 'Todo' category based on the provided task, index, and filter.

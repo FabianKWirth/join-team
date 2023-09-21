@@ -39,6 +39,7 @@ let directInputFieldIds = [
   "selectCategory",
 ];
 
+
 /**
  * Asynchronously includes HTML content from specified files into elements with the attribute 'include-tasks-html'.
  * It iterates through all elements with the 'include-tasks-html' attribute, fetches the content of the specified file,
@@ -63,11 +64,13 @@ async function includeTasksHtml(status = "toDo") {
   initAddTasks(status);
 }
 
+
 async function addTaskInit() {
   await includeHTML(1);
   await includeTasksHtml();
   setUserHeaderInitials();
 }
+
 
 /**
  * Asynchronously initializes the Add Tasks module.
@@ -85,6 +88,7 @@ async function initAddTasks(status) {
   unfinishedTaskData = { status: status };
 }
 
+
 /**
  * Loads and sets up various event listeners for the Add Tasks module.
  * It calls functions to set event listeners for selecting contacts, managing subtasks,
@@ -98,6 +102,7 @@ function loadTaskEventListeners() {
   setSubTaskEventListeners();
   setSelectedCategoryEventListeners();
 }
+
 
 /**
  * Sets event listeners for interacting with the selected category dropdown.
@@ -115,6 +120,7 @@ function setSelectedCategoryEventListeners() {
   });
 }
 
+
 /**
  * Sets an event listener on the input field with the ID "dropDownContactsTextFieldInput"
  * to dynamically filter and display available contacts as the user types.
@@ -129,6 +135,7 @@ function setShowAvailableContactsEventListener() {
     showAvailableContacts(inputField.value);
   });
 }
+
 
 /**
  * Sets event listeners for interacting with the select contact dropdown menu.
@@ -159,11 +166,12 @@ function setSelectContactEventListeners() {
   });
 }
 
+
 /**
  * Sets the minimum date to choose.
  */
 function setMinDate() {
-let today = new Date().toISOString().split('T')[0];
-  
-document.getElementById('newTaskDate').setAttribute('min', today);
+  let today = new Date().toISOString().split('T')[0];
+
+  document.getElementById('newTaskDate').setAttribute('min', today);
 }
