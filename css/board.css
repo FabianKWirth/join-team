@@ -118,7 +118,7 @@
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    padding: 48px 30px 10px 15px;
+    padding: 48px 0px 10px 0px;
     max-width: 1300px;
 }
 
@@ -555,7 +555,7 @@
 @media(max-width: 1356px) {
 
     .board-section .task-board {
-        padding: 48px 30px 10px 15px;
+        padding: 48px 0px 10px 0px;
     }
 
     .board-section .input-section input {
@@ -585,7 +585,7 @@
 
     .board-section .task-board {
         display: none;
-        padding: 48px 30px 10px 30px;
+        padding: 48px 0px 10px 0px;
     }
 
     .board-section .task-section-responsive {
