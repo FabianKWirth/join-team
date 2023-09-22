@@ -24,6 +24,7 @@ async function includeContactHTML(type) {
   addEventListenerToCloseAddContact();
 }
 
+
 /**
  * Event listener that handles clicks on the document.
  * Removes elements with a partial class name "add-contact" and adds scrolling to the body.
@@ -38,6 +39,7 @@ function addEventListenerToCloseAddContact() {
   stopClickEventPropagnationForElementById("contactCard");
 }
 
+
 /**
  * Sets template type-specific content for a contact form based on the provided 'type'.
  *
@@ -49,11 +51,16 @@ function setTemplateTypeSpecificValues(type) {
   setContactFormButtons(buttonsToSet);
   setContactFormText(textToSet);
 
+  form = document.getElementById("changeContact");
   if (type == "editContact") {
     setContactCredentials();
     setCurrentContactValues();
+    form.onsubmit = function() { saveContact(); return false; }
+  } else {
+    form.onsubmit = function() { createContact(); return false; };
   }
 }
+
 
 /**
  * Gets the title text based on the provided 'type'.
@@ -75,6 +82,7 @@ function getTextToSetConfig(type) {
   }
 }
 
+
 /**
  * Gets an array of button configurations based on the provided 'type'.
  *
@@ -92,7 +100,7 @@ function getButtonsToSetConfig(type) {
       },
       {
         class: "default-button button-create-contact",
-        function: "createContact()",
+        function: "",
         innerHtml: "Create Contact",
         type: 'submit'
       },
@@ -109,7 +117,7 @@ function getButtonsToSetConfig(type) {
       },
       {
         class: "default-button",
-        function: "saveContact()",
+        function: "",
         innerHtml: "Save",
         type: 'submit'
       },
@@ -118,6 +126,7 @@ function getButtonsToSetConfig(type) {
 
   return buttonsToSet;
 }
+
 
 /**
  * Sets the input values in the contact form with the current contact's name, email, and phone.
@@ -135,6 +144,7 @@ function setCurrentContactValues() {
   document.getElementById("contactPhoneInput").value = phone;
 }
 
+
 /**
  * Sets the contact credentials for the selected contact element.
  * This function updates the content of an HTML element with the id 'contactCredentials'
@@ -146,6 +156,7 @@ function setContactCredentials() {
       getContactIconHtml(contacts[selectedContact]);
   }
 }
+
 
 /**
  * Sets inner html values based on a provided object mapping element IDs to text content.
@@ -159,6 +170,7 @@ function setContactFormText(textToSet) {
     document.getElementById(elementId).innerHTML = textToSet[elementId];
   });
 }
+
 
 /**
  * Sets click event handlers for HTML elements based on a provided object mapping element IDs to function names.
@@ -175,6 +187,7 @@ function setContactFormButtons(buttonsToSet) {
   }
 }
 
+
 /**
  * Removes the "hide-overflow" class from the <body> element(s) to enable scrolling
  * when necessary. This function can be used to re-enable scrolling on the page.
@@ -185,6 +198,7 @@ function removeScrollFromBody() {
     element.classList.add("hide-overflow");
   });
 }
+
 
 /**
  * Adds the "hide-overflow" class to the <body> element(s) to disable scrolling

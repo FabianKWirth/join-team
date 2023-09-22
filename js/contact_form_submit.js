@@ -4,9 +4,9 @@
  * and removes itself after 2 seconds.
  */
 async function renderContactCreatedElement() {
-    if(window.innerWidth<1200){
+    if (window.innerWidth < 1200) {
         await renderContactNotificationLayout("contactListSection");
-    }else{
+    } else {
         await renderContactNotificationLayout();
     }
 
@@ -16,6 +16,7 @@ async function renderContactCreatedElement() {
         removeNotificationLayout();
     }, 2000);
 }
+
 
 /**
  * Renders a notification element for a contact save (change) event.
@@ -30,6 +31,7 @@ async function renderContactSavedElement() {
     }, 2000);
 }
 
+
 /**
  * Renders a notification element for a contact delete event.
  * The notification displays a "Delete" message and automatically fades out
@@ -43,6 +45,7 @@ async function renderContactDeleteElement() {
         removeNotificationLayout();
     }, 2000);
 }
+
 
 /**
  * Removes the notification layout by adding the "shift-out" class to
@@ -66,7 +69,6 @@ function setNotificationValue(input) {
     const notifications = document.getElementsByClassName("change-contact-notification-text");
     for (let i = 0; i < notifications.length; i++) {
         const notification = notifications[i];
-        console.log(notification);
         switch (input) {
             case 'Created': notification.innerHTML = "Contact successfully created";
                 break;
@@ -75,24 +77,10 @@ function setNotificationValue(input) {
             case 'Delete': notification.innerHTML = "Contact deleted";
                 break;
             default: notification.innerHTML = "Error adapting contact";
-        }}}
-
-/**
- * Renders the notification layout within the selected contact container
- * or add task container if available.
- */
-function renderContactNotificationLayout(target="selectedContactContainer") {
-    let newDiv = document.createElement("div");
-    newDiv.innerHTML +=/*html*/`
-    <div class="shift-in" id="contactChangeNotificationContainer">
-        <div class="contact-change-notification"><p class='change-contact-notification-text'></p></div>
-    </div>`;
-    if (document.getElementById(target) != null) {
-        document.getElementById(target).appendChild(newDiv);
-    } else if (document.getElementById("addTaskContainer")) {
-        document.getElementById("addTaskContainer").appendChild(newDiv);
+        }
     }
 }
+
 
 /**
  * Asynchronously creates a new contact by retrieving input values from the contact form
@@ -114,6 +102,7 @@ async function createContact() {
         renderContactCreatedElement();
     }
 }
+
 
 /**
  * Saves changes made to a contact by updating its information in the contacts array.
@@ -137,6 +126,7 @@ function saveContact() {
         renderContactSavedElement();
     }
 }
+
 
 /**
  * Updates the contacts array with a new contact if the provided contact information is not empty.

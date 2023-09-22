@@ -21,12 +21,12 @@
     display: flex;
 }
 
-.summery-elements {
+.summary-elements {
     display: flex;
     flex-direction: column;
 }
 
-.summery-container {
+.summary-container {
     display: flex;
     justify-content: space-between;
 }
@@ -197,7 +197,7 @@
 }
 
 @media(max-width: 970px) {
-    .summery-elements {
+    .summary-elements {
         width: 450px;
     }
 
@@ -272,8 +272,8 @@
         font-size: 13px;
     }
 
-    .summery-elements {
-        width: 360px;
+    .summary-elements {
+        width: 320px;
     }
 
     .task-middle {
