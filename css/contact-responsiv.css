@@ -155,12 +155,10 @@
 
     .add-contact-card {
         flex-direction: column;
-        height: 100%;
         gap: 0;
         position: relative;
         flex: none;
         max-width: 100%;
-        width: 60%;
 
     }
 
@@ -176,7 +174,6 @@
         position: relative;
         left: 50%;
         transform: translateX(-50%);
-        margin-bottom: -40px;
     }
 
     .button-create-contact {
@@ -187,6 +184,7 @@
         height: 50%;
         padding: 0 16px 16px 16px;
         gap: 28px;
+
     }
 
     .contact-form-area {
@@ -317,21 +315,47 @@
         bottom: 112px;
     }
 
-    .add-contact-card {
-        width: 85%;
-        height: 100%;
+    .add-contact-card{
+        min-width: 520px;
     }
+
+
 }
 
-@media(max-width: 560px) {
+@media(max-width: 540px) {
+    .add-contact-card{
+        min-width: 300px;
+    }
     .add-contact-card-header-content h4 {
         margin-bottom: 5px;
     }
-}
 
-@media(max-width: 460px) {
     #contactTemplateTitle {
         font-size: 36px;
+    }
+
+    .add-contact-card-header {
+        padding: 32px 16px;
+    }
+
+
+    #contactCredentials {
+        position: relative;
+        height: 80px;
+        margin-top: -40px;
+        margin-bottom: -40px;
+    }
+
+    #contactCredentials .circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 70px;
+        border: 3px;
+    }
+
+    #contactCredentials .circle .circle-text {
+        font-weight: 500;
+        font-size: 30px;
     }
 
     .add-contact-card-header-content h4 {
@@ -362,10 +386,6 @@
         padding: 12px;
     }
 
-    .add-contact-card {
-        width: 85%;
-        height: 100%;
-    }
 }
 
 @media (max-width: 800px) {

@@ -132,7 +132,7 @@ function setNumber() {
   boardContainer.innerHTML = tasks.length;
   progressContainer.innerHTML = tasksInProgress.length;
   awaitingContainer.innerHTML = awaitingFeedback.length;
-  urgentContainer.innerHTML = toDo.length;
+  urgentContainer.innerHTML = (tasks.filter(task => task.priority === 'urgent')).length;
   toDoContainer.innerHTML = toDo.length;
   doneContainer.innerHTML = done.length;
 }

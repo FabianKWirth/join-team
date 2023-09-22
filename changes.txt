@@ -1,0 +1,12 @@
+Danke fuers Feedback!
+
+Contact Story wird am Board nicht angezeigt:
+Contact Story wurde zu User Story umbenannt und ich habe vergessen das bei Add Task rauszunehmen. 
+Bei Board war keine Farbe mehr für Contact Story hinterlegt.
+
+Legal Notice: Menu wird nich angezeigt, wenn kein User eingeloggt ist.
+Ansonsten wir ein User angezeigt.
+
+Edit Task, Assigned Users sind jetzt vorausgewaehlt.
+
+Bei Contact erstellen/bearbeiten sind die Abstaende ueberarbeitet.

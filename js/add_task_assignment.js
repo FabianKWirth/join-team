@@ -74,11 +74,12 @@ function renderSelectedContactIcons() {
  * @returns {void}
  */
 function selectTaskContact(row) {
+    console.log(row);
     let contactId = row.getAttribute("id").replace("assignableContact", "");
     assignedContacts.push(contactId);
     row.onclick = () => unselectTaskContact(row);
 
-    renderSelectionOfContactFromTask(row, contactId)
+    renderSelectionOfContactFromTask(row, contactId);
     renderSelectedContactIcons();
     unfinishedTaskData["assignedContacts"] = assignedContacts;
 }
@@ -116,6 +117,7 @@ function unselectTaskContact(row) {
  */
 function renderSelectionOfContactFromTask(row, contactId) {
     row.classList.add("selected-option");
+    console.log("selectedContactCheckBox" + contactId);
     document.getElementById("selectedContactCheckBox" + contactId).src = './assets/icons/checkbox-filled.svg';
     document.getElementById("selectedContactCheckBox" + contactId).classList.add("white-symbol");
 }

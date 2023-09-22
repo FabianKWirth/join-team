@@ -7,22 +7,13 @@ let selectedContactListElement = null;
  * Asynchronously initializes the contacts page.
  * This function includes HTML Header and Sidebar content, initializes contacts, and sets user header initials.
  */
-async function initContactsPage() {
+async function contactsInit() {
   await includeHTML(3);
-  initContacts();
-  setUserHeaderInitials();
-  addResponsiveEditTaskMenuEventListeners();
-}
-
-/**
- * Initializes the contacts application, including data initialization, rendering the contact list,
- * and setting the current mobile display class.
- * This function ensures that the application is properly initialized and ready to display contacts.
- */
-async function initContacts() {
   await init();
   renderContacts();
   setCurrentShownMobileClass();
+  setUserHeaderInitials();
+  addResponsiveEditTaskMenuEventListeners();
 }
 
 

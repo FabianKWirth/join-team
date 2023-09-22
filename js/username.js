@@ -8,6 +8,7 @@ const userInitials = getUserInitials({ username: username });
  * This function loads the account data from the server
  */
 function getUserInitials(user) {
+  if (typeof username !== 'undefined') {
     const userNameParts = user["username"].split(" ");
     if (userNameParts[1] != null) {
       userSignature =
@@ -19,7 +20,9 @@ function getUserInitials(user) {
     }
     return userSignature;
   }
-  
+  return "";
+}
+
 /**
  * Generates the initials of a contact based on their name.
  *
@@ -28,8 +31,12 @@ function getUserInitials(user) {
  * @returns {string} A string containing the contact's initials in uppercase.
  */
 function setUserHeaderInitials() {
-    let myAccount = document.getElementById("myAccount");
-    let myAccountResponsiv = document.getElementById("myAccount-responsive");
+  let myAccount = document.getElementById("myAccount");
+  let myAccountResponsiv = document.getElementById("myAccount-responsive");
+  if (myAccount) {
     myAccount.innerHTML = userInitials;
+  }
+  if (myAccountResponsiv) {
     myAccountResponsiv.innerHTML = userInitials;
   }
+}

@@ -167,20 +167,34 @@ function resetPriority() {
  * @param {number} taskId - The ID of the task to load.
  * @returns {void}
  */
-function loadTask(taskId) {
+async function loadTask(taskId) {
     let task = tasks[taskId];
-    console.log(task);
-    document.getElementById("addTaskTitle").innerHTML = 'Edit Task';
+    await setFieldValues(task, taskId);
     unfinishedTaskData = task;
+    setTimeout(()=>{
+        loadAssignedContacts(task);
+    }, 500);
+
+}
+
+function loadAssignedContacts(task) {
+    task["assignedContacts"].forEach((contactId) => {
+        let row = document.getElementById(`assignableContact${contactId}`);
+        selectTaskContact(row);
+    });
+}
+
+
+
+async function setFieldValues(task, taskId) {
+    document.getElementById("addTaskTitle").innerHTML = 'Edit Task';
+    renderContactAssignmentDropDown();
     setNewTaskTitleFieldValue(task);
     setNewTaskDescriptionFieldValue(task);
     setNewTaskDateFieldValue(task);
-
-    setAssignedContacts(task);
     setPriorityValue(task);
     setCategoryValue(task);
     setSubTaskFieldValue(task);
-
     replaceCurrentAddTaskSubmit(taskId);
 }
 
@@ -204,22 +218,7 @@ function setNewTaskDescriptionFieldValue(task) {
     document.getElementById("newTaskDescription").value = task['taskDescription'];
 }
 
-/**
- * Sets the assigned contacts based on the task's "assignedContacts" property.
- * If no assigned contacts are present in the task, an empty array is assigned.
- * It also triggers the rendering of selected contact icons.
- *
- * @param {Object} task - The task object containing task-related data.
- * @returns {void}
- */
-function setAssignedContacts(task) {
-    if (task["assignedContacts"]) {
-        assignedContacts = task["assignedContacts"];
-    } else {
-        assignedContacts = [];
-    }
-    renderSelectedContactIcons();
-}
+
 
 /**
  * Sets the value of the "newTaskDate" input field based on the task's taskDate property.

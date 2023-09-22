@@ -10,11 +10,14 @@ async function updateBoardHTML() {
   loadTasksHTML();
   loadBoardEventListeners();
 }
+
+
 async function boardInit() {
   await includeHTML(2);
   updateBoardHTML();
   setUserHeaderInitials();
 }
+
 
 /**
  * Updates the HTML view of task sections ('Todo', 'In Progress', 'Awaiting Feedback', 'Done').
@@ -25,10 +28,8 @@ async function boardInit() {
  * @returns {void}
  */
 function loadTasksHTML(filter = null) {
-  document.getElementById("toDo").innerHTML = "";
-  document.getElementById("inProgress").innerHTML = "";
-  document.getElementById("awaitFeedback").innerHTML = "";
-  document.getElementById("done").innerHTML = "";
+
+  emptyBoard();
 
   const todo = tasks.filter(
     (t) => t["status"] == "toDo" && checkFilter(t, filter)
@@ -54,6 +55,26 @@ function loadTasksHTML(filter = null) {
   }
 }
 
+
+/**
+ * Clears all tasks from the board.
+ * @function
+ */
+function emptyBoard() {
+  document.getElementById("toDo").innerHTML = "";
+  document.getElementById("inProgress").innerHTML = "";
+  document.getElementById("awaitFeedback").innerHTML = "";
+  document.getElementById("done").innerHTML = "";
+}
+
+
+/**
+ * Checks if a task matches the given filter.
+ * @function
+ * @param {Object} task - The task to be checked.
+ * @param {string|null} filter - The filter string to apply to the task.
+ * @returns {boolean} True if the task matches the filter, false otherwise.
+ */
 function checkFilter(task, filter) {
   return (
     filter == null ||
@@ -61,6 +82,7 @@ function checkFilter(task, filter) {
     task["taskDescription"].includes(filter)
   );
 }
+
 
 /**
  * Renders HTML to display a message when there are no tasks to do.
@@ -72,6 +94,7 @@ function renderNoTaskToDo() {
   return `<div class="noToDo">No tasks To do</div>`;
 }
 
+
 /**
  * Renders HTML to display a message when there are no tasks in progress.
  *
@@ -81,6 +104,7 @@ function renderNoTaskToDo() {
 function renderNoInProgress() {
   return `<div class="noToDo">No tasks In progress</div>`;
 }
+
 
 /**
  * Renders HTML to display a message when there are no tasks awaiting feedback.
@@ -114,10 +138,10 @@ function generateHTML(task, index) {
   const priority = task["priority"];
   const subtaskCount = task["subTasks"] ? task["subTasks"].length : 0;
   const completedSubtaskCount = countCompletedSubtasks(task);
-  const progressBarHTML = generateProgressBarHTML(completedSubtaskCount,subtaskCount);
+  const progressBarHTML = generateProgressBarHTML(completedSubtaskCount, subtaskCount);
   const categoryClass = getCategoryClass(task);
   const priorityImageSrc = getPriorityImageSrc(priority);
-  return renderTaskCards( index, task, categoryClass, progressBarHTML, assignedContactsIcons, priorityImageSrc);
+  return renderTaskCards(index, task, categoryClass, progressBarHTML, assignedContactsIcons, priorityImageSrc);
 }
 
 /**
@@ -140,6 +164,7 @@ function countCompletedSubtasks(task) {
   return completedSubtaskCount;
 }
 
+
 /**
  * Generates HTML for a progress bar based on completed and total subtasks.
  *
@@ -161,6 +186,7 @@ function generateProgressBarHTML(completedSubtaskCount, subtaskCount) {
   return progressBarHTML;
 }
 
+
 /**
  * Determines and returns the CSS class based on the task's category value.
  *
@@ -177,6 +203,7 @@ function getCategoryClass(task) {
   return categoryClass;
 }
 
+
 /**
  * Generates HTML for assigned contact icons based on the provided assigned contacts.
  *
@@ -192,12 +219,14 @@ function getAssignedContactIcons(assignedContacts) {
     assignedContacts.forEach((assignedContact) => {
       if (insertedContacts < 6) {
         let contactIcon = getContactIconHtml(contacts[assignedContact]);
-        if (firstItem == true) {contactIcon = contactIcon.replace(
+        if (firstItem == true) {
+          contactIcon = contactIcon.replace(
             /class="circle"/g,
             'class="circle circle-1"'
           );
           firstItem = false;
-        } else {contactIcon = contactIcon.replace(
+        } else {
+          contactIcon = contactIcon.replace(
             /class="circle"/g,
             'class="circle circle-2"'
           );
@@ -210,6 +239,7 @@ function getAssignedContactIcons(assignedContacts) {
   return contactIconHtml;
 }
 
+
 /**
  * Adds a CSS class to highlight a DOM element with the specified ID.
  *
@@ -220,6 +250,7 @@ function getAssignedContactIcons(assignedContacts) {
 function highlight(id) {
   document.getElementById(id).classList.add("drag-area-highlight");
 }
+
 
 /**
  * Removes a CSS class to remove the highlight from a DOM element with the specified ID.
@@ -232,6 +263,7 @@ function removeHighlight(id) {
   document.getElementById(id).classList.remove("drag-area-highlight");
 }
 
+
 /**
  * Sets the currently dragged element to the specified ID.
  *
@@ -243,6 +275,7 @@ function startDragging(id) {
   currentDraggedElement = id;
 }
 
+
 /**
  * Prevents the default behavior of a drop event to allow dropping content.
  *
@@ -253,6 +286,7 @@ function startDragging(id) {
 function allowDrop(ev) {
   ev.preventDefault();
 }
+
 
 /**
  * Moves a task to a different category based on the specified event and category data.
@@ -286,6 +320,13 @@ function moveTo(ev) {
   }
 }
 
+
+/**
+ * Deletes a task from the tasks array, updates storage, removes the overlay, and re-renders the tasks.
+ * @function
+ * @async
+ * @param {number} taskIndex - The index of the task to delete.
+ */
 async function deleteTask(taskIndex) {
   tasks.splice([taskIndex], 1);
   setItem("tasks", tasks);
@@ -296,6 +337,7 @@ async function deleteTask(taskIndex) {
     loadTasksHTML();
   }, 500);
 }
+
 
 /**
  * Filters and updates the 'Todo' category based on a search query.
@@ -338,6 +380,7 @@ function filterToDoResponsive() {
   }
 }
 
+
 /**
  * Renders a filtered list of 'Todo' category tasks based on a search query.
  *
@@ -364,6 +407,7 @@ function renderSearchListToDo(todo, list, searchInput) {
   }
 }
 
+
 /**
  * Filters and updates the 'In Progress' category based on a search query.
  *
@@ -381,6 +425,7 @@ function filterInProgress() {
     renderSearchListInProgress(progress, list, searchInput);
   }
 }
+
 
 /**
  * Filters and updates the 'In Progress' task section in a responsive manner based on a search input.
@@ -402,6 +447,7 @@ function filterInProgressResponsive() {
     renderSearchListToDo(inProgress, list, searchInput);
   }
 }
+
 
 /**
  * Renders a filtered list of 'In Progress' category tasks based on a search query.
@@ -429,6 +475,7 @@ function renderSearchListInProgress(progress, list, searchInput) {
   }
 }
 
+
 /**
  * Filters and updates the 'Await Feedback' category based on a search query.
  *
@@ -446,6 +493,7 @@ function filterAwaitFeedback() {
     renderSearchListAwaitFeedback(feedback, list, searchInput);
   }
 }
+
 
 /**
  * Filters and updates the 'Await Feedback' task section in a responsive manner based on a search input.
@@ -467,6 +515,7 @@ function filterAwaitFeedbackResponsive() {
     renderSearchListToDo(awaitFeedback, list, searchInput);
   }
 }
+
 
 /**
  * Renders a filtered list of 'Await Feedback' category tasks based on a search query.
@@ -494,6 +543,7 @@ function renderSearchListAwaitFeedback(feedback, list, searchInput) {
   }
 }
 
+
 /**
  * Filters and updates the 'Done' category based on a search query.
  *
@@ -511,6 +561,7 @@ function filterDone() {
     renderSearchListDone(done, list, searchInput);
   }
 }
+
 
 /**
  * Filters and updates the 'Done' task section in a responsive manner based on a search input.
@@ -532,6 +583,7 @@ function filterDoneResponsive() {
     renderSearchListToDo(done, list, searchInput);
   }
 }
+
 
 /**
  * Renders a filtered list of 'Done' category tasks based on a search query.
@@ -558,6 +610,7 @@ function renderSearchListDone(done, list, searchInput) {
     list.innerHTML = renderNoDone();
   }
 }
+
 
 /**
  * Display a detailed task card for a specific task.
@@ -599,6 +652,7 @@ function showTaskCard(index) {
   includeEventlistenerToCloseOverlayBoard();
 }
 
+
 /**
  * Generates HTML for assigned contacts.
  *
@@ -620,6 +674,7 @@ function getAssignedContacts(assignedContacts) {
   }
   return assignedContactsHTML;
 }
+
 
 /**
  * Generates an "Assigned To" container if assigned contacts are present.
@@ -664,6 +719,7 @@ function getPriorityImageSrc(priority) {
   return imageSrc;
 }
 
+
 /**
  * Changes the image of a subtask field to mark its status (completed/incomplete).
  *
@@ -680,12 +736,14 @@ function subtaskChangeImg(id) {
   }
 }
 
+
 /**
  * Closes the overlay window on the board.
  */
 function closeBoardOverlay() {
   document.getElementById("overlayBoard").style.display = "none";
 }
+
 
 /**
  * Changes the source (URL) of an image with the specified ID to a new source.
@@ -697,6 +755,7 @@ function changeImage(newSrc, imageId) {
   const image = document.getElementById(imageId);
   image.src = newSrc;
 }
+
 
 /**
  * Returns the name of the contact assigned to a task based on the provided index.
@@ -714,6 +773,7 @@ function assignedTo(index) {
     return "";
   }
 }
+
 
 /**
  * Returns the initials of the contact assigned to a task based on the provided index.
@@ -737,6 +797,7 @@ function assignedInicials(index) {
   }
 }
 
+
 /**
  * Generates a "Subtask" container if there are subtasks present.
  *
@@ -753,6 +814,7 @@ function getSubtaskContainer(subtasks) {
   }
   return subtasksHtml;
 }
+
 
 /**
  * Generates HTML for subtasks if they are present in a task.
@@ -791,6 +853,7 @@ function getSubtasks(subtasks, task, index) {
   return subtasksHTML;
 }
 
+
 /**
  * Saves the status of a subtask (completed or incomplete) and updates it in the task data.
  *
@@ -811,6 +874,7 @@ function saveSubtask(subtaskStatus, i, index) {
   }
   showTaskCard(index);
 }
+
 
 /**
  * Displays the "Move To" dropdown menu in a task card and highlights the current category.
@@ -835,6 +899,7 @@ function showMoveTo(event, index, category) {
   }
 }
 
+
 /**
  * Re-renders the task card to update its content.
  *
@@ -844,6 +909,7 @@ function renderTaskCardAgain(event) {
   event.stopPropagation();
   loadTasksHTML();
 }
+
 
 /**
  * Updates the data category for a task and reloads the task list.

@@ -51,7 +51,7 @@ async function getStorageData() {
  * Searches for the "w3-include-html" attribute in the HTML file
  * and replaces it with the value of this attribute.
  */
-async function includeHTML(x) {
+async function includeHTML(pageId) {
   let includeElements = document.querySelectorAll("[w3-include-html]");
   for (let i = 0; i < includeElements.length; i++) {
     const element = includeElements[i];
@@ -61,9 +61,15 @@ async function includeHTML(x) {
       element.innerHTML = await resp.text();
     } else {
       element.innerHTML = "Page not found";
-    }}
-  bgDark(x);
-  bgDarkLegalNotice(x);
+    }
+  }
+
+  if (typeof username === 'undefined' || username == 'undefined') {
+    document.getElementById("sidebar-menu").remove();
+    document.getElementById("sidebar-menu-responsive").remove();
+    document.getElementById("myAccount").remove();
+  }
+  markCurrentPage(pageId);
   disableIcon();
 }
 
@@ -78,6 +84,7 @@ function getNewContactColor() {
   let color = contactIconColors[currentContactIconColorIndex + 1];
   return color;
 }
+
 
 /**
  * Generates an HTML representation of a contact's icon based on their initials and color.
@@ -97,6 +104,7 @@ function getContactIconHtml(contact) {
     return "";
   }
 }
+
 
 /**
  * Generates the initials of a contact based on their name.
@@ -119,25 +127,30 @@ function getContactInitials(contact) {
   return contactSignature;
 }
 
+
 /**
  * This function marks the menu item you are on
  *
  * @param {number} x - That is the menu item to be loaded
  */
-function bgDark(x) {
-  if (x < 4) {
-    document.getElementById(`menu-link${x}`).classList.add("bg-dark", "white");
-    document
-      .getElementById(`menu-responsive-link${x}`)
-      .classList.add("bg-dark", "white");
-    document.getElementById(
-      `menu-img${x}`
-    ).src = `assets/image/sidebar/menu-${x}-white.svg`;
-    document.getElementById(
-      `menu-responsive-img${x}`
-    ).src = `assets/image/sidebar/menu-${x}-white.svg`;
+function markCurrentPage(pageId) {
+  if (document.getElementById(`menu-link${pageId}`)) {
+    document.getElementById(`menu-link${pageId}`).classList.add("bg-dark", "white");
   }
+
+  if (document.getElementById(`menu-responsive-link${pageId}`)) {
+    document.getElementById(`menu-responsive-link${pageId}`).classList.add("bg-dark", "white");
+  }
+  if (document.getElementById(`menu-img${pageId}`)) {
+    document.getElementById(`menu-img${pageId}`).src = `assets/image/sidebar/menu-${pageId}-white.svg`;
+  }
+
+  if (document.getElementById(`menu-responsive-img${pageId}`)) {
+    document.getElementById(`menu-responsive-img${pageId}`).src = `assets/image/sidebar/menu-${pageId}-white.svg`;
+  }
+
 }
+
 
 /**
  * This function highlights the menu item under Legal Notice that you are currently on
@@ -156,6 +169,7 @@ function bgDarkLegalNotice(x) {
   }
 }
 
+
 /**
  * This function opens the menu from the header
  */
@@ -164,6 +178,9 @@ function ShowMenu() {
   document.getElementById("overlay").classList.remove("dNone");
 }
 
+/**
+ * Shows the responsive menu and overlay.
+ */
 function ShowMenuResponsive() {
   let menu = document.getElementById("header-menu-responsive");
   menu.classList.toggle("hidden");
@@ -171,10 +188,19 @@ function ShowMenuResponsive() {
   document.getElementById("overlay-responsive").classList.remove("dNone");
 }
 
+
+/**
+ * Close the main menu and overlay.
+ */
 function closeMenu() {
   document.getElementById("header-menu").classList.add("dNone");
   document.getElementById("overlay").classList.add("dNone");
 }
+
+
+/**
+ * Close the responsive menu and overlay.
+ */
 
 function closeMenuResponsive() {
   document.getElementById("overlay-responsive").classList.add("dNone");
@@ -201,6 +227,10 @@ function openContacts() {
 
 function openHelp() {
   window.location.href = `./help.html?name=${username}`;
+}
+
+function openLegalNotice() {
+  window.location.href = `./legal-notice.html?name=${username}`;
 }
 
 function stopClickEventPropagnationForElementById(elementId) {
