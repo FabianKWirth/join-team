@@ -4,7 +4,13 @@
  * and removes itself after 2 seconds.
  */
 async function renderContactCreatedElement() {
-    await renderNotificationLayout();
+    if(window.innerWidth<1200){
+        await renderContactNotificationLayout("contactListSection");
+    }else{
+        await renderContactNotificationLayout();
+    }
+
+    emptySelectedContactBody();
     setNotificationValue("Created");
     setTimeout(function () {
         removeNotificationLayout();
@@ -17,7 +23,7 @@ async function renderContactCreatedElement() {
  * and removes itself after 2 seconds.
  */
 async function renderContactSavedElement() {
-    await renderNotificationLayout();
+    await renderContactNotificationLayout();
     setNotificationValue("Changed");
     setTimeout(function () {
         removeNotificationLayout();
@@ -30,7 +36,7 @@ async function renderContactSavedElement() {
  * and removes itself after 2 seconds.
  */
 async function renderContactDeleteElement() {
-    await renderNotificationLayout();
+    await renderContactNotificationLayout();
     setNotificationValue("Delete");
 
     setTimeout(function () {
@@ -75,14 +81,14 @@ function setNotificationValue(input) {
  * Renders the notification layout within the selected contact container
  * or add task container if available.
  */
-function renderNotificationLayout() {
+function renderContactNotificationLayout(target="selectedContactContainer") {
     let newDiv = document.createElement("div");
     newDiv.innerHTML +=/*html*/`
-    <div class="contact-change-notification-container shift-in" id="contactChangeNotificationContainer">
+    <div class="shift-in" id="contactChangeNotificationContainer">
         <div class="contact-change-notification"><p class='change-contact-notification-text'></p></div>
     </div>`;
-    if (document.getElementById("selectedContactContainer") != null) {
-        document.getElementById("selectedContactContainer").appendChild(newDiv);
+    if (document.getElementById(target) != null) {
+        document.getElementById(target).appendChild(newDiv);
     } else if (document.getElementById("addTaskContainer")) {
         document.getElementById("addTaskContainer").appendChild(newDiv);
     }

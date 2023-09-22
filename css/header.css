@@ -64,6 +64,9 @@
     transition: .1s ease-in-out;
 }
 
+.help-link {
+    cursor: pointer;
+}
 
 .help:hover {
     transform: scale(1.1);
@@ -103,10 +106,3 @@
         display: none;
     }
 }
-
-
-
-
-
-
-

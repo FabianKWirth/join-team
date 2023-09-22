@@ -691,12 +691,8 @@
 
 @media(max-width: 800px) {
 
-    .board-section .head-section {
-        margin: 48px 0 0 0;
-    }
-
-    .board-section .task-area {
-        padding: 0 0 150px 0;
+    .board-section {
+        margin: 32px;
     }
 
     .board-section .task-card-overlay {
@@ -724,6 +720,11 @@
 }
 
 @media(max-width: 410px) {
+
+    .board-section {
+        margin: 16px;
+    }
+
     .board-section .title-h4 {
         font-size: 34px;
     }
@@ -769,7 +770,6 @@
     display: flex;
     justify-content: center;
     background-color: white;
-    gap: 32px;
     max-height: 95vh;
     margin-top: 2.5vh;
     z-index: 1000;

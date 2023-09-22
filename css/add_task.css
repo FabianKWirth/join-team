@@ -37,7 +37,7 @@
     justify-content: flex-start;
     flex-direction: column;
     gap: 20px;
-    min-width: 350px;
+    min-width: 300px;
     max-width: 550px;
     width: 100%;
     padding-right: 32px;

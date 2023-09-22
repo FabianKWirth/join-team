@@ -88,11 +88,13 @@ function getButtonsToSetConfig(type) {
         class: "alternative-button clear-button",
         function: 'removeElementsByPartialClassName("add-contact")',
         innerHtml: "Clear",
+        type: 'button'
       },
       {
         class: "default-button button-create-contact",
         function: "createContact()",
         innerHtml: "Create Contact",
+        type: 'submit'
       },
     ];
   }
@@ -103,11 +105,13 @@ function getButtonsToSetConfig(type) {
         class: "alternative-button",
         function: "deleteContact()",
         innerHtml: "Delete",
+        type: 'button'
       },
       {
         class: "default-button",
         function: "saveContact()",
         innerHtml: "Save",
+        type: 'submit'
       },
     ];
   }
@@ -166,10 +170,8 @@ function setContactFormButtons(buttonsToSet) {
   for (let i = 0; i < buttonsToSet.length; i++) {
     button = buttonsToSet[i];
     elementToSet.innerHTML += /*html*/ `
-            <button 
-            class='${button["class"]}' 
-            onclick='${button["function"]}'>${button["innerHtml"]}
-            </button>`;
+      <button class='${button["class"]}' onclick='${button["function"]}' type='${button["type"]}'>${button["innerHtml"]}
+      </button>`;
   }
 }
 

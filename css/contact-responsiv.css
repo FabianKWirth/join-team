@@ -125,7 +125,6 @@
         position: fixed;
         top: 126px;
         right: 30px;
-
     }
 
     .contact-button {
@@ -151,8 +150,6 @@
     }
 
     .add-contact-container {
-        top: 96px;
-        bottom: 96px;
         animation: bottomToCenter 0.5s ease-in-out forwards;
     }
 
@@ -164,7 +161,7 @@
         flex: none;
         max-width: 100%;
         width: 60%;
-       
+
     }
 
     .add-contact-card-header {
@@ -176,10 +173,10 @@
     #contactCredentials img {
         width: 120px;
         height: 120px;
-        position: absolute;
-        top: 50%;
+        position: relative;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translateX(-50%);
+        margin-bottom: -40px;
     }
 
     .button-create-contact {
@@ -188,7 +185,7 @@
 
     .add-contact-card-form {
         height: 50%;
-        padding: 0 16px;
+        padding: 0 16px 16px 16px;
         gap: 28px;
     }
 
@@ -197,7 +194,6 @@
         display: flex;
         flex-direction: column;
         gap: 15px;
-        margin-left: -48px;
     }
 
     .add-contact-card-form img {
@@ -264,10 +260,6 @@
         width: 100%;
         padding: 17px 36px;
     }
-
-    #contactCredentials .circle {
-        margin-top: -60px;
-    }
 }
 
 @media (max-device-width: 1000px) {
@@ -282,22 +274,12 @@
     }
 
     #contactChangeNotificationContainer {
-        left:0;
-        width:100%;
-    }
-
-
-
-    .add-contact-card-form input {
+        left: 0;
         width: 100%;
     }
 
-    .add-contact-card-form img {
-        margin-right: -21px;
-    }
-
     #addContactFormActions {
-        width: calc(100% + 48px);
+        width: 100%;
         justify-content: center;
     }
 
@@ -318,8 +300,7 @@
     .contacts-container {
         top: 80px;
         left: 0;
-        right: 0;
-        width: auto;
+        width: 100%;
     }
 
     #goBack {
@@ -340,23 +321,11 @@
         width: 85%;
         height: 100%;
     }
-
-    .add-contact-container {
-        top: 40px;
-    }
 }
 
 @media(max-width: 560px) {
     .add-contact-card-header-content h4 {
         margin-bottom: 5px;
-    }
-
-    .add-contact-card-form input {
-        width: 300px;
-    }
-
-    .add-contact-card {
-        width: 85%;
     }
 }
 
@@ -372,24 +341,12 @@
     #contactCredentials img {
         width: 80px;
         height: 80px;
-        top: unset;
     }
 
     .add-contact-card-form input {
-        width: 240px;
-        font-size: 16px;
-        padding: 6px 21px !important;
+        max-width: 220px;
     }
 
-    .add-contact-card-form img {
-        margin-right: 21px;
-        margin-top: -28px;
-    }
-
-    .add-contact-container {
-        top: 53px;
-        bottom: 53px;
-    }
 
     .contact-form-area {
         padding-top: 52px;
@@ -408,13 +365,6 @@
     .add-contact-card {
         width: 85%;
         height: 100%;
-    }
-}
-
-@media (max-height: 800px) {
-    .add-contact-container {
-        top: 20px;
-        bottom: 20px;
     }
 }
 
