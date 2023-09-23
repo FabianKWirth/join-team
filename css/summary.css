@@ -1,6 +1,6 @@
 .body {
     position: absolute;
-    margin: 64px;
+    padding: 64px;
     font-family: 'Inter', sans-serif;
 }
 
@@ -9,7 +9,6 @@
     align-items: center;
     gap: 30px;
     background-color: #F6F7F8;
-    margin-bottom: 30px;
 }
 
 .headline-h1 span {
@@ -201,6 +200,10 @@
         width: 450px;
     }
 
+    .body {
+        padding: 32px;
+    }
+
     .task-middle {
         gap: 43px;
     }
@@ -216,14 +219,13 @@
 
 @media(max-width: 800px) {
     .body {
-        margin: 0 0 70px 0;
+        padding: 0;
         display: flex;
-        justify-content: center;
         flex-direction: column;
         align-items: center;
     }
 
-    h1 {
+    .headline-h1 {
         font-size: 50px;
     }
 
@@ -237,6 +239,7 @@
         position: relative;
         flex-direction: column;
         gap: 6px;
+        margin-bottom: 30px;
     }
 
     .headline-h1 h1 {
@@ -250,7 +253,7 @@
     .seperator-responsiv {
         display: inline;
         position: absolute;
-        top: 100px;
+        top: 120px;
         left: 35px;
     }
 }
@@ -306,11 +309,6 @@
 
     .tasks-top {
         height: 110px;
-    }
-
-    .body {
-        position: relative;
-        height: fit-content;
     }
 
     .task-bottom {

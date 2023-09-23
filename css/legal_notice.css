@@ -16,6 +16,23 @@ body {
     word-wrap: break-word;
 }
 
+.privacy-policy-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.privacy-policy-container::-webkit-scrollbar-track {
+    background: #33333347;
+}
+
+.privacy-policy-container::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 5px;
+}
+
+.privacy-policy-container::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
 
 .break {
     margin-top: 80px;

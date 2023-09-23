@@ -32,7 +32,7 @@ async function init() {
  * Asynchronously loads user,tasks data from storage and assigns it to the global variables 'users','tasks'.
  * @async
  * @function
- * @returns {<void>} User data and tasks data is loaded and assigned.
+ * @returns {void} User data and tasks data is loaded and assigned.
  */
 async function getStorageData() {
   //fetches both arrays simoultaneously
@@ -287,5 +287,10 @@ function setElementValue(elementId, value) {
 
 async function helpInit() {
   await includeHTML();
-  setUserHeaderInitials()
+  setUserHeaderInitials();
+}
+
+async function legalNoticeInit(){
+  await includeHTML(5);
+  setUserHeaderInitials();
 }

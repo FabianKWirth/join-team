@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: login.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,197 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: login.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let container = document.getElementById("login-container");
+let hasExecuted = false;
 
+async function loginInit() {
+  await init();
+  renderLoginContainer();
+}
 
-    <h3> </h3>
+function renderLoginContainer() {
+  container.innerHTML = renderLoginContainerTemplate();
+  removeAnimationClass();
+}
 
+function renderLoginContainerTemplate() {
+  return /*html*/ `
+  &lt;div id="sign-up-btn-container" class=" animation">&lt;span class="sign-up-text">Not a Join user?&lt;/span>
+  &lt;span onclick="renderSignUpForm()" class=sign-up-btn>Sign up&lt;/span>&lt;/div>
+  &lt;form id="login-form" class="animation" onsubmit="login(); return false">
+  &lt;div class="heading-seperator">
+  &lt;h2 class="login-heading">Log in&lt;/h2>
+  &lt;div class="seperator">&lt;/div>&lt;/div>
+  &lt;input required id="login-email" class="input-login email" type="email" placeholder="Email">
+  &lt;input required id="login-password" class="input-login password" type="password" placeholder="Password">
+  &lt;span style="color: red" id="login-message">&lt;/span>&lt;div class="checkbox-container">
+  &lt;div class="login-checkbox-container">&lt;input class="login-checkbox" id="checkbox" type="checkbox">
+  &lt;label class="checkbox-label" for="checkbox">Remember me&lt;/label>&lt;/div>
+  &lt;span onclick="renderForgotPasswordForm()" class="forgot-password-span">I forgot my Password&lt;/span>&lt;/div> 
+  &lt;div class="login-button-container">&lt;button type="submit" class="login-button">Log in&lt;/button>
+  &lt;button onclick="guestLogin()" class="guest-button">Guest Log in&lt;/button>&lt;/div>
+  &lt;/form>`;
+}
 
+function renderSignUpForm() {
+  container.innerHTML = /*html*/ ` 
+  &lt;form onsubmit="checkPassword(); return false" class="sign-up-form">
+  &lt;img onclick="renderLoginContainer()" class="sign-up-arrow arrow" src="./assets/image/arrow-left-line.png">
+  &lt;div class="heading-seperator">&lt;h2 class="login-heading">Sign up&lt;/h2>
+  &lt;div class="seperator">&lt;/div>&lt;/div>&lt;div class="input-container">
+  &lt;input required id="username" class="input-login person" type="text" placeholder="Name">
+  &lt;input required id="email" class="input-login email" type="email" placeholder="Email">
+  &lt;input required id="password" minlength="6" class="input-login password" type="password" placeholder="Password">
+  &lt;input required id="confirmPassword" class="input-login password" type="password" placeholder="Confirm Password">&lt;/div>
+  &lt;span id="info">&lt;/span>
+  &lt;div class="accept-terms-checkbox">&lt;input required class="login-checkbox" id="checkbox" type="checkbox">
+  &lt;span>I accept the &lt;a target="_blank" href="./legal-notice.html" class="forgot-password-span">Privacy policy&lt;/a>&lt;/span>&lt;/div>
+  &lt;button id="sign-up-btn-form" type='submit'>Sign up&lt;/button>
+  &lt;/form>`;
+}
 
+function renderForgotPasswordForm() {
+  container.innerHTML = /*html*/ `
+  &lt;form onsubmit="onSubmit(event)" class="forgot-password-form">
+  &lt;img onclick="renderLoginContainer()" class="forgot-password-arrow arrow" src="./assets/image/arrow-left-line.png">
+  &lt;div class="heading-seperator">&lt;h2 class="login-heading">I forgot my Password&lt;/h2>&lt;div class="seperator">&lt;/div>&lt;/div>
+  &lt;p class="form-text">Don't worry! We will send you an email with the instructions to reset your password.&lt;/p>
+  &lt;input required name="email" id ="forgot-password-email" class="input-login email" name='forgot-password-email' type="email" placeholder="Email">
+  &lt;span id="forgot-password-info" style="color: red">&lt;/span>
+  &lt;button type="submit" class="send-email-btn">Send me the email&lt;/button>
+  &lt;/form>
+  `;
+}
 
+/**
+ * Remove the class animation from the form and sign up button.
+ */
+function removeAnimationClass() {
+  if (hasExecuted) {
+    let button = document.getElementById("sign-up-btn-container");
+    let form = document.getElementById("login-form");
+    form.classList.remove("animation");
+    button.classList.remove("animation");
+  }
+  hasExecuted = true;
+}
 
+/**
+ * Check's if the passwords match.
+ *
+ * @returns a boolean
+ */
+function checkPassword() {
+  let password1 = document.getElementById("password").value;
+  let password2 = document.getElementById("confirmPassword").value;
+  let info = document.getElementById("info");
 
+  if (password1 === password2) {
+    addUser();
+    return true;
+  } else {
+    info.innerHTML =
+      "&lt;span style='color: red'>Your password don't match&lt;/span>";
+    return false;
+  }
+}
 
+/**
+ * Check's if the user is registred, if not a message is displayed.
+ */
+function login() {
+  let message = document.getElementById("login-message");
+  let email = document.getElementById("login-email");
+  let password = document.getElementById("login-password");
+  let user = users.find(
+    (u) => u.email == email.value &amp;&amp; u.password == password.value
+  );
 
+  if (user) {
+    window.location.href = `./summary.html?name=${user.username}`;
+  } else message.innerHTML = "Wrong password or email! Try again.";
+}
 
+/**
+ * Check's if the user is registred, if not a message is displayed.
+ */
+function checkEmail(event) {
+  let message = document.getElementById("forgot-password-message");
+  let email = document.getElementById("forgot-password-email");
+  let user = users.find((u) => u.email == email.value);
+  checkEmailTemplate(message, user);
+}
 
-    
+async function checkEmailTemplate(message, user) {
+  if (user) {
+    let formData = new FormData(event.target);
+    try {
+      let response = await action(formData);
+      if (response.ok) {
+        showMessage(message);
+      } else {
+        message.innerHTML = "This email is not registered.";
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  }
+}
 
+/**
+ * Displays a message element for a brief period.
+ *
+ * @param {HTMLElement} message - The HTML element to display.
+ */
+function showMessage(message) {
+  message.classList.remove("d-none");
 
+  setTimeout(() => {
+    message.classList.add("d-none");
+  }, 4000);
+}
 
+/**
+ * Handles form submission by preventing the default behavior and calling checkEmail.
+ *
+ * @param {Event} event - The submit event.
+ */
+async function onSubmit(event) {
+  event.preventDefault();
+  checkEmail(event);
+}
 
+/**
+ * Performs an asynchronous action by sending a POST request with form data.
+ *
+ * @param {FormData} formData - The form data to send in the request.
+ * @returns {Promise&lt;Response>} - A promise that resolves to the fetch response.
+ */
+async function action(formData) {
+  const input = "http://gruppe-671.developerakademie.net/join/send_mail.php";
+  const requestInit = { method: "post", body: formData };
+  const response = await fetch(input, requestInit);
 
+  if (response.ok) return response;
+}
+
+/**
+ * Redirects the user to a guest login page.
+ */
+function guestLogin() {
+  window.location.href = `./summary.html?name=Guest`;
+}</code></pre>
+        </article>
+    </section>
 
 
 
@@ -56,7 +221,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Sep 23 2023 09:16:28 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Sep 23 2023 09:16:27 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

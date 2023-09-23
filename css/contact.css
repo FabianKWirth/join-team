@@ -60,7 +60,7 @@ h4 {
 
 .add-contact-card {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     max-width: 90%;
     height: 594px;
@@ -71,6 +71,10 @@ h4 {
     overflow: auto;
     position: relative;
 }
+
+.add-contact-card::-webkit-scrollbar {
+    display: none;
+  }
 
 .add-contact-card-header {
     background-color: #2A3647;
@@ -338,8 +342,24 @@ h4 {
     width: calc(100% - 233px);
     height: calc(100vh - 96px);
     display: flex;
-    overflow-y: scroll;
 }
+
+.selected-contact-container::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .selected-contact-container::-webkit-scrollbar-track {
+    background: #33333347;
+  }
+  
+  .selected-contact-container::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 5px;
+  }
+  
+  .selected-contact-container::-webkit-scrollbar-thumb:hover {
+    background: #888;
+  }
 
 .contact-list-container {
     background-color: #FFF;
@@ -360,6 +380,10 @@ h4 {
     align-items: flex-start;
     width: 100%;
 }
+
+#contactList::-webkit-scrollbar {
+    display: none;
+  }
 
 .scrollable {
     overflow-y: scroll;
@@ -434,6 +458,7 @@ h4 {
 .selected-contact-container {
     position: relative;
     padding: 110px 43px;
+    overflow: auto;
 }
 
 .selected-contact-container h1 {

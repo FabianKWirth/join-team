@@ -115,7 +115,6 @@
     .selected-contact-container {
         width: 100%;
         padding: 30px 30px;
-        overflow-y: hidden;
     }
 
     #goBack {
@@ -159,6 +158,7 @@
         position: relative;
         flex: none;
         max-width: 100%;
+        height: fit-content;
 
     }
 
@@ -265,7 +265,7 @@
         flex-direction: column;
         justify-content: flex-start;
         position: relative;
-        overflow-y: scroll;
+        overflow-y: auto;
         max-height: 90%;
         height: fit-content;
         gap: 0px;
@@ -299,6 +299,7 @@
         top: 80px;
         left: 0;
         width: 100%;
+        height: calc(100vh - 155px);
     }
 
     #goBack {

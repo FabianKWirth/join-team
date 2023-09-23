@@ -16,8 +16,8 @@
     max-width: 1300px;
 }
 
-.board-section .head-section h1{
-    margin-left:0px;
+.board-section .head-section h1 {
+    margin-left: 0px;
     margin-right: 0px;
 }
 
@@ -330,6 +330,12 @@
     padding: 48px 40px;
     overflow: auto;
     z-index: 90;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.board-section .task-card-overlay::-webkit-scrollbar {
+    display: none;
 }
 
 .board-section .card-category-top-section {
@@ -632,7 +638,8 @@
 
     h1 {
         font-size: 47px;
-        margin-left: 0;;
+        margin-left: 0;
+        ;
     }
 
     .board-section .noToDo {
@@ -776,10 +783,18 @@
     border-radius: 30px;
     overflow: auto;
     position: relative;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 #addTaskCard #addTaskContainer {
     position: relative;
+}
+
+#addTaskCard::-webkit-scrollbar {
+    display: none;
 }
 
 @keyframes rightToCenter {

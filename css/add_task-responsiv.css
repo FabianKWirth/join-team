@@ -1,6 +1,7 @@
 @media (max-width: 1250px) {
     #addTaskTitle {
         margin-bottom: 64px !important;
+        margin-left: 0px;
     }
 
     #addTaskCard{

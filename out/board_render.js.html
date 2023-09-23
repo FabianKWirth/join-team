@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: board_render.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,291 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: board_render.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Renders an HTML progress bar based on the provided progress percentage, completed subtask count, and total subtask count.
+ *
+ * @param {number} progressPercentage - The progress percentage (0-100).
+ * @param {number} completedSubtaskCount - The count of completed subtasks.
+ * @param {number} subtaskCount - The total count of subtasks.
+ * @returns {string} The HTML code for the progress bar.
+ */
+function renderProgressBar(progressPercentage, completedSubtaskCount, subtaskCount) {
+    return `
+    &lt;div class="progress-bar-section">
+        &lt;div class="progress-bar">
+            &lt;div class="progress" style="width: ${progressPercentage}%;">&lt;/div>
+        &lt;/div>
+        &lt;div class="progress-bar-subtasks">${completedSubtaskCount}/${subtaskCount} Subtasks&lt;/div>
+    &lt;/div>
+    `;
+}
 
 
-    <h3> </h3>
+/**
+ * Renders an HTML task card based on the provided data and elements.
+ *
+ * @param {number} index - The index of the task.
+ * @param {object} task - The task object containing task information.
+ * @param {string} categoryClass - The CSS class for the task category.
+ * @param {string} progressBarHTML - The HTML code for the progress bar.
+ * @param {string} assignedContactsIcons - The HTML code for assigned contact icons.
+ * @param {string} priorityImageSrc - The image source URL for task priority.
+ * @returns {string} The HTML code for the task card.
+ */
+function renderTaskCards(index, task, categoryClass, progressBarHTML, assignedContactsIcons, priorityImageSrc) {
+    return `
+    &lt;div id="taskCard${index}" onclick="showTaskCard(${index})" draggable="true" ondrop="moveTo(event)" ondragstart="startDragging(${index})" class="task-card" data-category="${task['status']}">
+        &lt;div class="task-headline">
+            &lt;div class="card-category ${categoryClass}">${task['taskCategoryValue']}&lt;/div> 
+            &lt;div class="move" onclick="showMoveTo(event, ${index}, '${task['status']}')">Move&lt;/div>
+        &lt;/div>
+        &lt;div>
+            &lt;h4>${task['taskName']}&lt;/h4>
+            &lt;div class="card-description">${task['taskDescription']}&lt;/div>
+        &lt;/div>
+        ${progressBarHTML}
+        &lt;div class="task-card-bottom-section">
+            &lt;div class="task-card-users">
+                ${assignedContactsIcons}
+            &lt;/div>
+            &lt;img src="${priorityImageSrc}" alt="Prio">
+        &lt;/div>
+    &lt;/div>
+    `;
+}
 
 
+/**
+ * Generates an HTML task card for display in an overlay.
+ *
+ * @param {number} index - The index of the task.
+ * @param {string} categoryClass - The CSS class for the task category.
+ * @param {string} category - The task category.
+ * @param {string} name - The task name.
+ * @param {string} description - The task description.
+ * @param {string} date - The due date of the task.
+ * @param {string} priority - The priority level of the task.
+ * @param {string} priorityImageSrc - The image source URL for task priority.
+ * @param {string} getAssignedText - The HTML for the assigned contacts text.
+ * @param {string} assignedContactsHTML - The HTML for assigned contacts icons.
+ * @param {string} getSubtaskText - The HTML for the subtasks text.
+ * @param {string} subtasksHTML - The HTML for subtasks.
+ * @returns {string} The HTML code for the task card overlay.
+ */
+function generateTaskCardHTML(index, categoryClass, category, name, description, date, priority, priorityImageSrc, getAssignedText, assignedContactsHTML, getSubtaskText, subtasksHTML) {
+    return `
+        &lt;div id="overlayBoard" class="overlayBoard" onclick="loadTasksHTML()">
+            &lt;div id="taskCard${index}" class="task-card-overlay">
+                &lt;div class="card-category-top-section">
+                    &lt;div class="card-category-overlay ${categoryClass}">${category}&lt;/div> 
+                    &lt;img onclick="closeBoardOverlay(), loadTasksHTML();" src="assets/icons/close.svg">
+                &lt;/div>
+                &lt;div>
+                    &lt;h4 class="title-h4">${name}&lt;/h4>
+                &lt;/div>
+                &lt;div class="card-description-overlay">${description}&lt;/div>
+                &lt;div  class="card-description-overlay">
+                    &lt;div class="dark-gray">Due date:&lt;/div>
+                    &lt;div>${date}&lt;/div>
+                &lt;/div>
+                &lt;div class="priority-container card-description-overlay">
+                    &lt;div class="dark-gray">Priority:&lt;/div>
+                    &lt;div class="priority">
+                        &lt;div>${priority}&lt;/div>
+                        &lt;img src="${priorityImageSrc}">
+                    &lt;/div>
+                &lt;/div>
+                &lt;div id="assign" class="assigned">
+                        ${getAssignedText}
+                        ${assignedContactsHTML}
+                &lt;/div>
+                &lt;div class="subtasks">
+                    &lt;div id="subtaskTitel" class="subtaskTitel">
+                        ${getSubtaskText}
+                    &lt;/div>
+                    &lt;div class="subtasks-container">
+                        &lt;div class="subtasks-container">
+                            ${subtasksHTML}
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/div>
+                &lt;div class="edit-container">
+                    &lt;div class="edit" onmouseover="changeImage('assets/icons/delete-blue.svg', 'trashImage')" onmouseout="changeImage('assets/icons/trashcan-icon.svg', 'trashImage')" onclick="deleteTask(${index})">
+                        &lt;img id="trashImage" src="assets/icons/trashcan-icon.svg">
+                        &lt;div>Delete&lt;/div>
+                    &lt;/div>
+                    &lt;img src="assets/image/board/edit-line.svg">
+                    &lt;div onclick="openEditTaskTemplate(${index})" class="edit" onmouseover="changeImage('assets/icons/edit-blue.svg', 'editImage')" onmouseout="changeImage('assets/icons/pen-icon.svg', 'editImage')">
+                        &lt;img id="editImage" src="assets/icons/pen-icon.svg"> 
+                        &lt;div ">Edit&lt;/div>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
+        &lt;/div>
+    `;
+}
 
 
+/**
+ * Generates HTML code for a subtask within a task card.
+ *
+ * @param {string} subtaskId - The ID of the subtask.
+ * @param {number} subtaskStatus - The status of the subtask (0 for incomplete, 1 for complete).
+ * @param {number} i - The index of the subtask within the subtasks array.
+ * @param {number} index - The index of the parent task.
+ * @param {string} subtaskImgSrc - The image source URL for the subtask.
+ * @param {object} subtask - The subtask object containing its name and other details.
+ * @returns {string} The HTML code for the subtask.
+ */
+function renderSubtask(subtaskId, subtaskStatus, i, index, subtaskImgSrc, subtask) {
+    return `
+        &lt;div class="subtask" onclick="subtaskChangeImg('${subtaskId}'); saveSubtask(${subtaskStatus}, ${i}, ${index}), loadTasksHTML()">
+            &lt;img id="${subtaskId}" src="${subtaskImgSrc}">
+            &lt;div>${subtask['name']}&lt;/div>
+        &lt;/div>
+    `;
+}
 
 
+/**
+ * Generates HTML code for assigned contacts within a task card.
+ *
+ * @param {object} contacts - An object containing contact information.
+ * @param {string} assignedContact - The ID of the assigned contact.
+ * @returns {string} The HTML code for assigned contacts.
+ */
+function getAssignedContactsRenderHTML(contacts, assignedContact) {
+    if (assignedContact &amp;&amp; contacts[assignedContact]) {
+        return `
+            &lt;div class='assigned-contacts'>
+                &lt;div class='contact-circle'>${getContactIconHtml(contacts[assignedContact])}&lt;/div>
+                ${contacts[assignedContact]['name']}
+            &lt;/div>
+        `;
+    } else {
+        return "";
+    }
+}
 
 
+/**
+ * Generates the HTML for the "Move To" dropdown menu in a task card.
+ *
+ * @param {number} index - The index of the task card.
+ * @returns {string} - The generated HTML for the "Move To" dropdown menu.
+ */
+function renderMoveToInTaskCards(index) {
+    return `
+        &lt;div id="taskMoveTo" class="task-moveTo">
+            &lt;div onclick="renderTaskCardAgain(event)" class="moveTo-img">
+                &lt;img src="assets/icons/close.svg">
+            &lt;/div>
+            &lt;span class="moveTo-h4">Move to&lt;/span>
+            &lt;div class="move-categorys">
+                &lt;span onclick="newDataCategory(event, 'toDo', ${index})" id="moveToDo" class="move-task-button">To-Do&lt;/span>
+                &lt;span onclick="newDataCategory(event, 'inProgress', ${index})" id="moveInProgress" class="move-task-button">In Progress&lt;/span>
+                &lt;span onclick="newDataCategory(event, 'awaitFeedback', ${index})" id="moveAwaitFeedback" class="move-task-button">Awaiting Feedback&lt;/span>
+                &lt;span onclick="newDataCategory(event, 'done', ${index})" id="moveDone" class="move-task-button">Done&lt;/span>
+            &lt;/div> 
+        &lt;/div>
+    `;
+}
 
 
-    
+/**
+ * Renders the HTML for a task and appends it to the 'toDo' section.
+ *
+ * @param {object} task - The task object to be rendered.
+ * @param {number} index - The index of the task.
+ */
+function renderTaskHTML(task, index){
+    let taskStatus=task['status'];
+    document.getElementById(taskStatus).innerHTML += generateHTML(task, index);
+}
 
 
+/**
+ * Renders the HTML for a task in the 'Todo' category based on the provided task, index, and filter.
+ *
+ * @param {Array} todo - An array of tasks in the 'Todo' category.
+ * @param {object} task - The task to render.
+ * @param {number} index - The index of the task in the tasks array.
+ * @returns {void}
+ */
+function renderTodoTaskHTML(todo, task, index) {
+    if (todo.length > 0) {
+        if (task['status'] == 'toDo') {
+            document.getElementById('toDo').innerHTML += generateHTML(task, index);
+        }
+    } else {
+        document.getElementById('toDo').innerHTML = renderNoTaskToDo();
+    }
+}
 
+/**
+ * Renders the HTML for a task in the 'In Progress' category based on the provided task, index, and filter.
+ *
+ * @param {Array} inProgress - An array of tasks in the 'In Progress' category.
+ * @param {object} task - The task to render.
+ * @param {number} index - The index of the task in the tasks array.
+ * @returns {void}
+ */
+function renderInProgressTaskHTML(inProgress, task, index) {
+    if (inProgress.length > 0) {
+        if (task['status'] == 'inProgress') {
+            document.getElementById('inProgress').innerHTML += generateHTML(task, index);
+        }
+    } else {
+        document.getElementById('inProgress').innerHTML = renderNoInProgress();
+    }
+}
+         
+/**
+ * Renders the HTML for a task in the 'Awaiting Feedback' category based on the provided task, index, and filter.
+ *
+ * @param {Array} awaitFeedback - An array of tasks in the 'Awaiting Feedback' category.
+ * @param {object} task - The task to render.
+ * @param {number} index - The index of the task in the tasks array.
+ * @returns {void}
+ */
+function renderAwaitFeedbackTaskHTML(awaitFeedback, task, index) {
+    if (awaitFeedback.length > 0) {
+        if (task['status'] == 'awaitFeedback') {
+            document.getElementById('awaitFeedback').innerHTML += generateHTML(task, index);
+        }
+    } else {
+        document.getElementById('awaitFeedback').innerHTML = renderNoAwaitFeedback();
+    }
+}
 
-
+/**
+ * Renders the HTML for a task in the 'Done' category based on the provided task, index, and filter.
+ *
+ * @param {Array} done - An array of tasks in the 'Done' category.
+ * @param {object} task - The task to render.
+ * @param {number} index - The index of the task in the tasks array.
+ * @returns {void}
+ */
+function renderDoneTaskHTML(done, task, index) {
+    if (done.length > 0) {
+        if (task['status'] == 'done') {
+            document.getElementById('done').innerHTML += generateHTML(task, index);
+        }
+    } else {
+        document.getElementById('done').innerHTML = renderNoDone();
+    }
+}</code></pre>
+        </article>
+    </section>
 
 
 
@@ -56,7 +315,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Sep 23 2023 09:16:28 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Sep 23 2023 09:16:27 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,12 +1,10 @@
 /**
- * Represents the priority level selected for a task.
- * @type {string|null} - Can be "urgent", "medium", "low", or null if not set.
+ * Represents the priority level selected for a task. Can be "urgent", "medium", "low", or null if not set.
  */
 let selectedTaskPriority = null;
 
 /**
- * Indicates whether assigned contacts are currently displayed.
- * @type {boolean} - True if assigned contacts are displayed, false otherwise.
+ * Indicates whether assigned contacts are currently displayed. True if assigned contacts are displayed, false otherwise.
  */
 let showAssignedContacts = false;
 
@@ -65,6 +63,9 @@ async function includeTasksHtml(status = "toDo") {
 }
 
 
+/**
+ * Initializes the task-related functionality by including HTML content and setting user header initials.
+ */
 async function addTaskInit() {
   await includeHTML(1);
   await includeTasksHtml();
