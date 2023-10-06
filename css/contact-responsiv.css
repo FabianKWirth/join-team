@@ -54,6 +54,15 @@
 }
 
 @media (max-width: 1200px) {
+
+    .add-contact-card {
+        flex-direction: column;
+        justify-content: flex-start;
+        position: relative;
+        overflow-y: auto;
+        max-height: 90%;
+        gap: 0px;
+    }
     .selected-contact-header {
         flex-direction: column;
         align-items: start;
@@ -261,15 +270,7 @@
 }
 
 @media (max-device-width: 1000px) {
-    .add-contact-card {
-        flex-direction: column;
-        justify-content: flex-start;
-        position: relative;
-        overflow-y: auto;
-        max-height: 90%;
-        height: fit-content;
-        gap: 0px;
-    }
+
 
     #contactChangeNotificationContainer {
         left: 0;
@@ -316,7 +317,7 @@
         bottom: 112px;
     }
 
-    .add-contact-card{
+    .add-contact-card {
         min-width: 520px;
     }
 
@@ -324,9 +325,10 @@
 }
 
 @media(max-width: 540px) {
-    .add-contact-card{
+    .add-contact-card {
         min-width: 300px;
     }
+
     .add-contact-card-header-content h4 {
         margin-bottom: 5px;
     }
