@@ -165,7 +165,7 @@ async function onSubmit(event) {
  * @returns {Promise<Response>} - A promise that resolves to the fetch response.
  */
 async function action(formData) {
-  const input = "http://gruppe-671.developerakademie.net/join/send_mail.php";
+  const input = "http://join.fabian-wirth.net/send_mail.php";
   const requestInit = { method: "post", body: formData };
   const response = await fetch(input, requestInit);
 
